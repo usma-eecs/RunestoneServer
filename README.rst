@@ -13,6 +13,8 @@ Build Status |buildstatus|
 Documentation
 -------------
 
+**NOTE:** This branch is for bug fixes on the currently deployed webfaction site.  No further development will take place on this web2py based platform.
+
 Documentation for the project is on our official `documentation site <http://docs.runestoneinteractive.org>`_  This includes
 the list of dependencies you need to install in order to build the books included in the repository, or to set up 
 a complete server environment.
