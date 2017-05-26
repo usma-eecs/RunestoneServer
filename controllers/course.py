@@ -17,5 +17,22 @@ def serve():
             return f.read()
 
     response.view = 'course/thinkcspy/{}/{}'.format(chapter, rest)
-    print "got a request for a book", request.args
-    return dict(basecourse='thinkcspy')
+    return dict(basecourse=basecourse, course='', app='runestone')
+
+
+
+# <script type="text/javascript">
+#   eBookConfig = {};
+#   eBookConfig.host = 'http://127.0.0.1:8000' ? 'http://127.0.0.1:8000' : 'http://127.0.0.1:8000';
+#   eBookConfig.app = eBookConfig.host+'/runestone';
+#   eBookConfig.ajaxURL = eBookConfig.app+'/ajax/';
+#   eBookConfig.course = 'thinkcspy';
+#   eBookConfig.logLevel = 10;
+#   eBookConfig.loginRequired = false;
+#   eBookConfig.build_info = "3.7.2";
+#   eBookConfig.isLoggedIn = false;
+#   eBookConfig.useRunestoneServices = true;
+#   eBookConfig.python3 = true;
+#   eBookConfig.basecourse = 'thinkcspy';
+#   eBookConfig.runestone_version = '2.7.13';
+# </script>
