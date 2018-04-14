@@ -60,9 +60,9 @@ def initdb(config, list_tables, reset, fake):
 
     if reset:
         click.confirm("Resetting the database will delete the database and the contents of the databases folder.  Are you sure?", default=False, abort=True, prompt_suffix=': ', show_default=True, err=False)
-        res = subprocess.call("dropdb {}".format(config.dbname),shell=True)
+        res = subprocess.call("dropdb -U it105 {}".format(config.dbname),shell=True)
         if res == 0:
-            res = subprocess.call("createdb --echo {}".format(config.dbname),shell=True)
+            res = subprocess.call("createdb -U it105 --echo {}".format(config.dbname),shell=True)
         else:
             click.echo("Failed to drop the database do you have permission?")
             sys.exit(1)
@@ -104,7 +104,7 @@ def initdb(config, list_tables, reset, fake):
 def run(config, with_scheduler):
     """Starts up the runestone server and optionally scheduler"""
     os.chdir(findProjectRoot())
-    res = subprocess.Popen("python -u web2py.py --ip=0.0.0.0 --port=8000 --password='<recycle>' -d rs.pid -K runestone --nogui -X", shell=True)
+    res = subprocess.Popen("python -u web2py.py --ip=0.0.0.0 --port=8080 --password='<recycle>' -d rs.pid -K runestone --nogui -X", shell=True)
 
 #
 #    shutdown
