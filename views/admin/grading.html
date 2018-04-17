@@ -8,10 +8,12 @@
   eBookConfig.calcTotalsURL = '{{=calcTotalsURL}}';
   eBookConfig.setTotalURL = '{{=setTotalURL}}';
   eBookConfig.getCourseStudentsURL = '{{=getCourseStudentsURL}}';
+  eBookConfig.getCourseSectionsURL = '{{=getCourseSectionsURL}}';
   eBookConfig.get_assignment_release_statesURL = '{{=get_assignment_release_statesURL}}';
   eBookConfig.course = '{{=course_id}}';
   // load the students dictionary once the page loads
   $(getCourseStudents)
+  $(getCourseSections)
 </script>
 
 <div class="col-md-5" style="margin-top: 50px; margin-bottom: 10px;">
@@ -23,6 +25,7 @@
             <option value="student">student</option>
             <option value="chapter">chapter</option>
             <option value="assignment">assignment</option>
+            <option value="section">section</option>
         </select>
 
 
@@ -33,6 +36,7 @@
             <option  value="question">question</option>
             <option value="chapter">chapter</option>
             <option  value="assignment">assignment</option>
+            <option value="section">section</option>
         </select>
 
 

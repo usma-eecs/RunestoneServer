@@ -318,13 +318,20 @@ def admin():
             if row.user_id not in instructordict:
                 studentdict[row.user_id]= name
 
+   ###Create sections
+    section_names = {}
+    section_query = db(db.sections.course_id == auth.user.course_id).select()
+    for row in section_query:
+        section_names[row.id] = row.name
+
+
     #Not rebuilding
     if not request.vars.projectname or not request.vars.startdate:
         course = db(db.courses.course_name == auth.user.course_name).select().first()
         curr_start_date = course.term_start_date.strftime("%m/%d/%Y")
         return dict(sectionInfo=sectionsList,startDate=date,
                     coursename=auth.user.course_name, course_id=auth.user.course_name,
-                    instructors=instructordict, students=studentdict,
+                    instructors=instructordict, students=studentdict, sections=section_names,
                     curr_start_date=curr_start_date, confirm=True,
                     build_info=my_build, master_build=master_build, my_vers=my_vers,
                     mst_vers=mst_vers
@@ -355,7 +362,7 @@ def admin():
 
 
     return dict(sectionInfo=sectionsList, startDate=date.isoformat(), coursename=auth.user.course_name,
-                instructors=instructordict, students=studentdict, confirm=False,
+                instructors=instructordict, students=studentdict, confirm=False, sections=section_names,
                 task_name=uuid, course_url=course_url, course_id=auth.user.course_name)
 
 
@@ -369,6 +376,17 @@ def course_students():
     for row in cur_students:
         name = row.first_name + " " + row.last_name
         username = row.username
+        searchdict[str(username)] = name
+    return json.dumps(searchdict)
+
+###Finds the course sections
+@auth.requires(lambda: verifyInstructorStatus(auth.user.course_name, auth.user), requires_login=True)
+def course_sections():
+    cur_sections = db(db.sections.course_id == auth.user.course_id).select(db.sections.id, db.sections.name)
+    searchdict = {}
+    for row in cur_sections:
+        name = row.name
+        username = row.id
         searchdict[str(username)] = name
     return json.dumps(searchdict)
 
@@ -419,10 +437,19 @@ def grading():
         for chapter_q in chapter_questions:
             q_list.append(chapter_q.name)
         chapter_labels[row.chapter_label] = q_list
-    return dict(assignmentinfo=assignments, students=searchdict, chapters=chapter_labels, gradingUrl = URL('assignments', 'get_problem'),
+
+    ###Create sections
+    section_names = {}
+    section_query = db(db.sections.course_id == auth.user.course_id).select()
+    for row in section_query:
+        section_names[row.id] = row.name
+
+    return dict(assignmentinfo=assignments, students=searchdict,chapters=chapter_labels,sections=section_names,gradingUrl = URL('assignments', 'get_problem'),
                 autogradingUrl = URL('assignments', 'autograde'),gradeRecordingUrl = URL('assignments', 'record_grade'),
                 calcTotalsURL = URL('assignments', 'calculate_totals'), setTotalURL=URL('assignments', 'record_assignment_score'),
                 getCourseStudentsURL = URL('admin', 'course_students'), get_assignment_release_statesURL= URL('admin', 'get_assignment_release_states'),
+                ### gets the course sections for use in grading and display.
+                getCourseSectionsURL = URL('admin', 'course_sections'),
                 course_id = auth.user.course_name, assignmentids=assignmentids, assignment_deadlines=assignment_deadlines, question_points=json.dumps(question_points)
                 )
 
