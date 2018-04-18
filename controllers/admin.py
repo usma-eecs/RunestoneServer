@@ -1,4 +1,4 @@
-from os import path
+#from os import path
 import os
 from datetime import date, timedelta
 from collections import OrderedDict
@@ -374,7 +374,7 @@ def course_students():
     ).select(db.auth_user.username, db.auth_user.first_name,db.auth_user.last_name)
     searchdict = {}
     for row in cur_students:
-        name = row.first_name + " " + row.last_name
+        name = row.last_name + ", " + row.first_name
         username = row.username
         searchdict[str(username)] = name
     return json.dumps(searchdict)
@@ -382,12 +382,27 @@ def course_students():
 ###Finds the course sections
 @auth.requires(lambda: verifyInstructorStatus(auth.user.course_name, auth.user), requires_login=True)
 def course_sections():
-    cur_sections = db(db.sections.course_id == auth.user.course_id).select(db.sections.id, db.sections.name)
+    cur_sections = db(
+        (db.auth_user.id == db.section_users.auth_user) &
+        (db.section_users.section == db.sections.id) &
+        (db.section_users.section > 0)
+    ).select(db.section_users.section, db.sections.name, db.auth_user.username, db.auth_user.first_name, db.auth_user.last_name)
+    list_sections = db(db.sections.course_id == auth.user.course_id).select(db.sections.id, db.sections.name)
+    #print(cur_sections)
+    #print(list_sections)
     searchdict = {}
-    for row in cur_sections:
-        name = row.name
-        username = row.id
-        searchdict[str(username)] = name
+    for row in list_sections:
+        #print row
+        section_name = row.name
+        #print(section_name)
+        searchdict[str(section_name)] = {}
+    #print(searchdict)
+    for row1 in cur_sections:
+        #print(row1)
+        name = row1.auth_user.last_name + ", " + row1.auth_user.first_name
+        username = row1.auth_user.username
+        section_name = row1.sections.name
+        searchdict[str(section_name)][str(username)] = name 
     return json.dumps(searchdict)
 
 @auth.requires(lambda: verifyInstructorStatus(auth.user.course_name, auth.user), requires_login=True)

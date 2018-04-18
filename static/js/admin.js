@@ -1,5 +1,4 @@
 var assignment_release_states = null;
-
 function gradeIndividualItem() {
     var select3 = document.getElementById("gradingoption3");
     var colType = select3.options[select3.selectedIndex].value;
@@ -542,13 +541,14 @@ function pickedStudents(column) {
     var keys = [];
     var i;
     for (i in studentslist) {
-	//window.alert(i);
+	//alert(i);
         if (studentslist.hasOwnProperty(i)) {
             keys.push(i);
         }
     }
 
     keys.sort();
+    console.log(keys)
 
     for (i = 0; i < keys.length; i++) {
         var key = keys[i];
@@ -608,8 +608,8 @@ function pickedSections(column) {
     for (i = 0; i < keys.length; i++) {
         var key = keys[i];
         var option = document.createElement("option");
-        option.text = key;
-        option.value = key;
+        option.text = sectionlist[key];
+        option.value = sectionlist[key];
         pickedcolumn.add(option);
         pickedcolumn.style.visibility = 'visible';
 
@@ -747,7 +747,7 @@ function showColumn1() {
         q.value = 'question';
         select3.add(q);
 
-        var options = ['chapter', 'assignment'];
+        var options = ['chapter', 'assignment', 'student'];
         for (i = 0; i < options.length; i++) {
             var val = options[i];
             var option = document.createElement("option");
