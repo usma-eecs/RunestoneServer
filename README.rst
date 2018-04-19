@@ -65,7 +65,7 @@ Installation
 
 #. Use ``rsmanage`` for all additional requirements. You must be in an active virtualenv.
 
-   * Build the book. In this example the book is for AY184. Each semester will be a difference github repo. The ``--skipclone`` writes over an older version of that book. 
+   * Build the book. In this example the book is for AY184. Each semester will be a difference github repo. The `--skipclone` writes over an older version of that book. 
 
    ::
    
