@@ -542,9 +542,13 @@ function pickedStudents(column) {
     var i;
     for (i in studentslist) {
 	//alert(i);
+        //if (studentslist.hasOwnProperty(i)) {
+        //    keys.push(i);
+        //}
         if (studentslist.hasOwnProperty(i)) {
-            keys.push(i);
+            keys.push(studentslist[i]);
         }
+
     }
 
     keys.sort();
@@ -553,8 +557,8 @@ function pickedStudents(column) {
     for (i = 0; i < keys.length; i++) {
         var key = keys[i];
         var option = document.createElement("option");
-        option.text = studentslist[key];
-        option.value = studentslist[key];
+        option.text = key;
+        option.value = key;
         pickedcolumn.add(option);
         pickedcolumn.style.visibility = 'visible';
 
