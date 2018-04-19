@@ -46,8 +46,8 @@ Installation
 
    ::
 
-       /home/USMAEDU/first.last/it105Env/web2py: cd applications
-       /applications: git clone https://github.com/RunestoneInteractive/RunestoneServer  runestone
+       /home/USMAEDU/first.last/it105Env/web2py: cd application
+       /home/USMAEDU/first.last/it105Env/web2py/applications: git clone https://github.com/RunestoneInteractive/RunestoneServer  runestone
        /home/USMAEDU/first.last/it105Env/web2py/applications: cd runestone
        /home/USMAEDU/first.last/it105Env/web2py/applications/runestone: pip install -r requirements.txt
 
