@@ -34,12 +34,12 @@ Installation
       /home/USMAEDU/first.last/it105Env: cd web2py
       ###need to add in the other dependencies
 
-#. Clone this repository **into the web2py/applications directory**. When you make the clone you should clone it into ``runestone`` rather than the default ``RunestoneServer``.  All the web2py stuff is configured assuming that the application will be called **runestone**.
+#. Clone this repository **into the web2py/applications directory**. All the web2py stuff is configured assuming that the application will be called **runestone**.
 
    ::
 
        /home/USMAEDU/first.last/it105Env/web2py: cd application
-       /home/USMAEDU/first.last/it105Env/web2py/applications: git clone https://github.com/RunestoneInteractive/RunestoneServer  runestone
+       /home/USMAEDU/first.last/it105Env/web2py/applications: git clone https://github.com/usma-eecs/runestone.git
        /home/USMAEDU/first.last/it105Env/web2py/applications: cd runestone
        /home/USMAEDU/first.last/it105Env/web2py/applications/runestone: pip install -r requirements.txt
 
