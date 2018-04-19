@@ -1,17 +1,9 @@
 IT105 Directions for Runestone Server
 =======================================
 
-.. image:: https://badge.waffle.io/RunestoneInteractive/RunestoneServer.png?label=ready&title=Ready
-   :target: https://waffle.io/RunestoneInteractive/RunestoneServer
-   :alt: 'Stories in Ready'
+This assumes that you are modifying the book(s) on the existing code.it105.army/runstone. The database is allready installed and backed up daily. Please see the IT105 Course director for the server name. Much of this installation can be done without being connected to the server.
 
-.. image:: https://badges.gitter.im/Join%20Chat.svg
-   :alt: Join the chat at https://gitter.im/bnmnetp/runestone
-   :target: https://gitter.im/bnmnetp/runestone?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
-
-
-.. image:: http://bnmnetp.me:8088/buildStatus/icon?job=RunestoneServer
-   :alt: Build Status
+A more complete documentation for Runestone Server can be found in the ReadMe at https://github.com/RunestoneInteractive/RunestoneServer.
 
 Installation
 ------------
