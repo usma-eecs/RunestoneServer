@@ -47,9 +47,9 @@ Installation
    ::
 
        /home/USMAEDU/first.last/it105Env/web2py: cd applications
-       /home/USMAEDU/first.last/it105Env/web2py/applications: git clone https://github.com/RunestoneInteractive/RunestoneServer runestone
-       # cd runestone
-       # pip install -r requirements.txt
+       /applications: git clone https://github.com/RunestoneInteractive/RunestoneServer  runestone
+       /home/USMAEDU/first.last/it105Env/web2py/applications: cd runestone
+       /home/USMAEDU/first.last/it105Env/web2py/applications/runestone: pip install -r requirements.txt
 
 #. Set up your environmental variables to connect to the database. Make the changes in ``~/.bashrc``
 
