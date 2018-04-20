@@ -131,15 +131,6 @@ function getSelectedItem(type){
         }
     }
 
-    else if (type == "section"){
-        if (col.selectedIndex != -1) {
-            // they've selected a question; return that question name
-            return col.options[col.selectedIndex].value;
-        }
-        else {
-            return null;
-        }
-    }
 }
 
 function autoGrade(){
@@ -591,37 +582,6 @@ function pickedChapters(column) {
 
 }
 
-//This shows the sections
-function pickedSections(column) {
-    var pickedcolumn = document.getElementById(column);
-    $("#" + column).empty();
-
-    var sectionlist = sections;
-    var keys = [];
-    var i;
-    
-    for (i in sectionlist) {
-	//window.alert(i);
-        if (sectionlist.hasOwnProperty(i)) {
-            keys.push(i);
-        }
-    }
-    console.log(keys)
-    keys.sort()
-
-    for (i = 0; i < keys.length; i++) {
-        var key = keys[i];
-        var option = document.createElement("option");
-        option.text = sectionlist[key];
-        option.value = sectionlist[key];
-        pickedcolumn.add(option);
-        pickedcolumn.style.visibility = 'visible';
-
-
-    }
-
-}
-
 
 function showColumn1() {
 
@@ -730,37 +690,6 @@ function showColumn1() {
         }
 
         pickedStudents('gradingcolumn1');
-    }
-
-    else if (val == 'section') {
-        $("#gradingoption2").empty();
-        $("#gradingoption3").empty();
-
-        var defaultOption = document.createElement("option");
-        defaultOption.text = "Select your option";
-        defaultOption.value = '';
-        select.add(defaultOption);
-
-        var thirdDefaultOption = document.createElement("option");
-        thirdDefaultOption.text = "Select your option";
-        thirdDefaultOption.value = '';
-        select3.add(thirdDefaultOption);
-        $("option[value='']").attr("disabled", "disabled");
-        var q = document.createElement("option");
-        q.text = 'question';
-        q.value = 'question';
-        select3.add(q);
-
-        var options = ['chapter', 'assignment', 'student'];
-        for (i = 0; i < options.length; i++) {
-            var val = options[i];
-            var option = document.createElement("option");
-            option.text = val;
-            option.value = val;
-            select.add(option);
-        }
-
-        pickedSections('gradingcolumn1');
     }
 
 }
