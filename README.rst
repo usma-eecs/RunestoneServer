@@ -32,7 +32,7 @@ Installation
    
       /home/USMAEDU/first.last/it105Env: git clone https://github.com/usma-eecs/web2py.git
       /home/USMAEDU/first.last/it105Env: cd web2py
-      ###need to add in the other dependencies
+      /home/USMAEDU/first.last/it105Env: git submodule update --init --recursive
 
 #. Clone this repository **into the web2py/applications directory**. All the web2py stuff is configured assuming that the application will be called **runestone**.
 
