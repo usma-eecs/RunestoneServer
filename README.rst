@@ -50,10 +50,15 @@ Installation
    ::
 
        export WEB2PY_CONFIG=production
-       export WEB2PY_MIGRATE=Yes
+       export WEB2PY_MIGRATE=No
        export DBURL=postgresql://username:pw@host/runestone
        export TEST_DBURL=postgresql://username:pw@host/runestone
        export DEV_DBURL=postgresql://username:pw@host/runestone
+   
+   * If you are working with an exisitng runstone database, you'll want to keep the `WEB2PY_MIGRATE` variable above set to `No`. If you are creating a new database (on a different web server), set it to `Yes`: 
+
+   :: 
+       export WEB2PY_MIGRATE=Yes
 
 #. Use ``rsmanage`` for all additional requirements. You must be in an active virtualenv.
 
