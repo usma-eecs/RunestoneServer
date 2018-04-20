@@ -104,7 +104,7 @@ def initdb(config, list_tables, reset, fake):
 def run(config, with_scheduler):
     """Starts up the runestone server and optionally scheduler"""
     os.chdir(findProjectRoot())
-    res = subprocess.Popen("python -u web2py.py --ip=0.0.0.0 --port=8080 --password='<recycle>' -d rs.pid -K runestone --nogui -X", shell=True)
+    res = subprocess.Popen("python -u web2py.py --ip=0.0.0.0 --port=8000 --password='<recycle>' -d rs.pid -K runestone --nogui -X", shell=True)
 
 #
 #    shutdown
@@ -254,9 +254,9 @@ def inituser(config, instructor, fromfile):
         # csv file should be username, email first_name, last_name, password, course
         # users from a csv cannot be instructors
         for line in csv.reader(fromfile):
-            if len(line) != 6:
+            if len(line) != 7:
                 click.echo("Not enough data to create a user.  Lines must be")
-                click.echo("username, email first_name, last_name, password, course")
+                click.echo("username, email, first_name, last_name, password, course, section")
                 exit(1)
             if "@" not in line[1]:
                 click.echo("emails should have an @ in them in column 2")
@@ -268,6 +268,7 @@ def inituser(config, instructor, fromfile):
             userinfo['last_name'] = line[3]
             userinfo['email'] = line[1]
             userinfo['course'] = line[5]
+            userinfo['section'] = line[6]
             userinfo['instructor'] = False
             os.environ['RSM_USERINFO'] = json.dumps(userinfo)
             res = subprocess.call("python web2py.py -S runestone -M -R applications/runestone/rsmanage/makeuser.py", shell=True)
@@ -282,6 +283,7 @@ def inituser(config, instructor, fromfile):
         userinfo['last_name'] = click.prompt("Last Name")
         userinfo['email'] = click.prompt("email address")
         userinfo['course'] = click.prompt("course name")
+        userinfo['section'] = click.prompt("course section")
         userinfo['instructor'] = True if instructor else click.confirm("Make this user an instructor", default=False)
 
         os.environ['RSM_USERINFO'] = json.dumps(userinfo)
