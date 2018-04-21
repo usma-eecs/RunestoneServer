@@ -784,7 +784,7 @@ function showColumn2() {
             select3.add(defaultOption);
             $("option[value='']").attr("disabled", "disabled");
             var option = document.createElement("option");
-            option.text = 'all student';
+            option.text = 'all students';
             option.value = 'student';
             select3.add(option);
 
