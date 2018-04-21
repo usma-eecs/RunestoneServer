@@ -907,16 +907,25 @@ function getCourseStudents(){
     });
 }
 
+function addSectionOptions() {
+  // this fancy select returns options that have student but don't have sections
+  $('select[id^=gradingoption]:contains(student):not(:contains(section))').each(function() {
+      var select = $(this); 
+      $.each(sections,function(key,value){
+        select.append($('<option>', {
+          value: 'student', text: "section " + key
+        }));
+      });
+  });
+}
+
 function getCourseSections(){
   var url = eBookConfig.getCourseSectionsURL;
+  
   $.getJSON(url,function(result){
     sections = result;
-    
-    $.each(sections,function(key,value){
-      $('#gradingoption1').append($('<option>', {
-          value: 'student', text: "section " + key
-      }));
-    });
+    addSectionOptions();
+    $('select[id^=gradingoption]').change(addSectionOptions);
   });
 }
 
