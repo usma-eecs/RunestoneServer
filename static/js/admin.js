@@ -524,26 +524,31 @@ function displayDefaultQuestion(column) {
 
 
 function pickedStudents(column) {
-
     var pickedcolumn = document.getElementById(column);
     $("#" + column).empty();
-    // students = students.replace(/&#x27;/g, '"');
+    
     var studentslist = students;
+    
+    // add section support - kyle.king
+    var respOptNum = column.slice(13);
+    var respOpt = $("#gradingoption" + respOptNum);
+    var respOptVal = respOpt.find("option:selected").text();
+
+    if (respOptVal.match("^section ")) {
+      var section = respOptVal.slice(8);
+      studentslist = sections[section];
+    }
+    // end section support - kyle.king
+    
     var keys = [];
     var i;
     for (i in studentslist) {
-	//alert(i);
-        //if (studentslist.hasOwnProperty(i)) {
-        //    keys.push(i);
-        //}
         if (studentslist.hasOwnProperty(i)) {
             keys.push(studentslist[i]);
         }
-
     }
 
     keys.sort();
-    console.log(keys)
 
     for (i = 0; i < keys.length; i++) {
         var key = keys[i];
@@ -903,17 +908,17 @@ function getCourseStudents(){
 }
 
 function getCourseSections(){
-    jQuery.ajax({
-        url: eBookConfig.getCourseSectionsURL,
-        type: "POST",
-        dataType: "JSON",
-        data: {},
-        success: function (retdata) {
-            sections = retdata;
-        }
+  var url = eBookConfig.getCourseSectionsURL;
+  $.getJSON(url,function(result){
+    sections = result;
+    
+    $.each(sections,function(key,value){
+      $('#gradingoption1').append($('<option>', {
+          value: 'student', text: "section " + key
+      }));
     });
+  });
 }
-
 
 function getStudents(sectionName) {
     var section = sectionName;
